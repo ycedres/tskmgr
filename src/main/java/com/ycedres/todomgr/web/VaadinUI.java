@@ -5,25 +5,23 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
-import com.ycedres.todomgr.model.TaskRepository;
 import com.ycedres.todomgr.model.Task;
+import com.ycedres.todomgr.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-
-
 @SpringUI
-@Theme("valo")
+@Theme("mytheme")
 public class VaadinUI extends UI {
 
-    private final TaskRepository repo;
-    private final TaskEditor editor;
     final Grid<Task> grid;
+    private final TaskService taskService;
+    private final TaskEditor editor;
     private final Button addNewBtn;
 
     @Autowired
-    public VaadinUI(TaskRepository repo,TaskEditor editor) {
-        this.repo = repo;
+    public VaadinUI(TaskService taskService, TaskEditor editor) {
+        this.taskService = taskService;
         this.editor = editor;
         this.grid = new Grid<>(Task.class);
         this.addNewBtn = new Button("New Task");
@@ -43,6 +41,7 @@ public class VaadinUI extends UI {
         VerticalLayout mainLayout = new VerticalLayout(actions, grid, editor);
         setContent(mainLayout);
 
+        grid.setCaption("Tareas");
         grid.setHeight(300, Unit.PIXELS);
         grid.setColumns("id", "description");
 
@@ -57,7 +56,7 @@ public class VaadinUI extends UI {
     }
 
     private void listTasks() {
-        grid.setItems(repo.findAll());
+        grid.setItems(taskService.getAll());
     }
 
 }

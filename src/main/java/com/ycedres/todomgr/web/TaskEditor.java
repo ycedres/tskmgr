@@ -9,7 +9,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import com.ycedres.todomgr.model.TaskRepository;
+import com.ycedres.todomgr.service.TaskService;
 import com.ycedres.todomgr.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @UIScope
 public class TaskEditor extends VerticalLayout{
 
-    private final TaskRepository repository;
+    private final TaskService taskService;
 
     private Task task;
 
@@ -31,8 +31,8 @@ public class TaskEditor extends VerticalLayout{
     Binder<Task> binder = new Binder<>(Task.class);
 
     @Autowired
-    public TaskEditor(TaskRepository repository) {
-        this.repository = repository;
+    public TaskEditor(TaskService taskService) {
+        this.taskService = taskService;
 
         addComponents(description,actions);
 
@@ -43,8 +43,8 @@ public class TaskEditor extends VerticalLayout{
         save.setStyleName(ValoTheme.BUTTON_PRIMARY);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 
-        save.addClickListener(e -> repository.save(task));
-        delete.addClickListener(e -> repository.delete(task));
+        save.addClickListener(e -> taskService.addTask(task));
+        delete.addClickListener(e -> taskService.deleteTask(task));
         cancel.addClickListener(e -> editTask(task));
         setVisible(false);
 
@@ -63,7 +63,7 @@ public class TaskEditor extends VerticalLayout{
         final boolean persisted = t.getId() != null;
 
         if (persisted) {
-            task = repository.findOne(t.getId());
+            task = taskService.getTask(t.getId());
         }
         else {
             task = t;
@@ -81,6 +81,7 @@ public class TaskEditor extends VerticalLayout{
         // ChangeHandler is notified when either save or delete
         // is clicked
         save.addClickListener(e -> h.onChange());
+
         delete.addClickListener(e -> h.onChange());
     }
 

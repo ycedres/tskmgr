@@ -14,11 +14,21 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
+    public Task getTask(Integer taskId) {
+        return taskRepository.getOne(taskId);
+    }
+
+    @Override
     public void addTask(Task taskDAO) {
         Task t = new Task();
         t.setDescription(taskDAO.getDescription());
 
         taskRepository.save(t);
+    }
+
+    @Override
+    public void deleteTask(Task taskDAO) {
+        taskRepository.delete(taskDAO);
     }
 
     @Override
