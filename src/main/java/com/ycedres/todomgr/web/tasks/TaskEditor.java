@@ -1,4 +1,4 @@
-package com.ycedres.todomgr.web;
+package com.ycedres.todomgr.web.tasks;
 
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
