@@ -33,22 +33,10 @@ public class TodoMgrUI extends UI {
     private ShowUserLayoutFactory usuario;
     private Button addNewBtn;
 
-    //@Autowired
-    //private ShowUser su;
-
     private Panel changeTab = new Panel();
 
-    //@Autowired --> ¿POR QUÉ ESTO PUEDE ESTAR COMENTADO?
-/*    public TodoMgrUI(TaskService taskService, TaskEditor editor, UserService userService) {
-        this.taskService = taskService;
-        this.userService = userService;
-        this.editor = editor;
-        this.grid = new Grid<>(Task.class);
-        //this.grid = new Grid<>(User.class);
-        this.addNewBtn = new Button("New Task");
-    }*/
 
-    @Override
+/*    @Override
     protected void init(VaadinRequest request) {
 
 
@@ -65,7 +53,7 @@ public class TodoMgrUI extends UI {
         setContent(grid);
         listTasks();
         //listUsers();
-    }
+    }*/
 
 /*
     @Override
@@ -99,7 +87,7 @@ public class TodoMgrUI extends UI {
         listTasks();
     }/**/
 
-/*
+
     @Override
     protected void init(VaadinRequest request) {
 
@@ -115,7 +103,6 @@ public class TodoMgrUI extends UI {
         uiLayout.setSizeFull();
         uiLayout.setMargin(true);
 
-        ShowUserLayoutFactory usuario = new ShowUserLayoutFactory();
         uiLayout.addComponent(usuario.createComponent());
 
         content.setContent(uiLayout);
@@ -125,7 +112,7 @@ public class TodoMgrUI extends UI {
         // Set the VerticalLayout as the content of the UI
         setContent(root);
     }
-*/
+
 
     private void listTasks() {
         //grid.setItems(taskService.getAll());
