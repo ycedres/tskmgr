@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 
 
 @Service
-@Component
 public class UserServiceImpl implements UserService{
 
     public static final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -31,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
     public List<User> getAllUsers() {
         if (this.userRepository == null) {
-            log.info("userRepository es null");
+            log.info("userRepository es null (getAll)");
         }
         else {
             log.info("userRepository NO es null");

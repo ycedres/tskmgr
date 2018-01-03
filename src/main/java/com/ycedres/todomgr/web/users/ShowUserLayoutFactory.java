@@ -39,6 +39,7 @@ public class ShowUserLayoutFactory {
             return this;
         }
 
+
         public ShowUserLayout load() {
             //UserService userService = new UserServiceImpl();
             if (userService == null) {
@@ -47,6 +48,7 @@ public class ShowUserLayoutFactory {
             userList = userService.getAllUsers();
             return this;
         }
+
 
         public ShowUserLayout layout() {
             addComponent(userTable);

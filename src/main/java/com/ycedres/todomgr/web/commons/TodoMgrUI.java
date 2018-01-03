@@ -10,6 +10,7 @@ import com.ycedres.todomgr.model.User;
 import com.ycedres.todomgr.service.TaskService;
 import com.ycedres.todomgr.service.UserService;
 import com.ycedres.todomgr.web.tasks.TaskEditor;
+import com.ycedres.todomgr.web.users.ShowUser;
 import com.ycedres.todomgr.web.users.ShowUserLayoutFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,32 +19,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Theme("mytheme")
 public class TodoMgrUI extends UI {
 
-    final Grid<Task> grid;
+    //Grid<Task> grid;
+    Grid<User> grid;
     //final Grid<User> grid;
-    private final TaskService taskService;
-    private final UserService userService;
-    private final TaskEditor editor;
-    private final Button addNewBtn;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TaskEditor editor;
+
+    @Autowired
+    private ShowUserLayoutFactory usuario;
+    private Button addNewBtn;
+
+    //@Autowired
+    //private ShowUser su;
 
     private Panel changeTab = new Panel();
 
     //@Autowired --> ¿POR QUÉ ESTO PUEDE ESTAR COMENTADO?
-    public TodoMgrUI(TaskService taskService, TaskEditor editor, UserService userService) {
+/*    public TodoMgrUI(TaskService taskService, TaskEditor editor, UserService userService) {
         this.taskService = taskService;
         this.userService = userService;
         this.editor = editor;
         this.grid = new Grid<>(Task.class);
         //this.grid = new Grid<>(User.class);
         this.addNewBtn = new Button("New Task");
-    }
-/*
+    }*/
+
     @Override
     protected void init(VaadinRequest request) {
 
 
         // esto no funciona y no sé por qué
-
-        ShowUserLayoutFactory usuario = new ShowUserLayoutFactory();
+        //ShowUser us = new ShowUser();
+        //su.UnMetodo();
+        //this.grid = new Grid<>(Task.class);
+        this.grid = new Grid<>(User.class);
+        //ShowUserLayoutFactory usuario = new ShowUserLayoutFactory();
         usuario.createComponent();
          //
 
@@ -52,8 +66,8 @@ public class TodoMgrUI extends UI {
         listTasks();
         //listUsers();
     }
-    */
 
+/*
     @Override
     protected void init(VaadinRequest request) {
         // build layout
@@ -114,7 +128,8 @@ public class TodoMgrUI extends UI {
 */
 
     private void listTasks() {
-        grid.setItems(taskService.getAll());
+        //grid.setItems(taskService.getAll());
+        grid.setItems(userService.getAll());
     }
 /*
     private void listUsers() {
